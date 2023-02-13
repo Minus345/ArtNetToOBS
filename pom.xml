@@ -52,7 +52,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        com.obscontrol.Main
+                                        org.obscontrol.Main
                                     </mainClass>
                                 </manifest>
                             </archive>
