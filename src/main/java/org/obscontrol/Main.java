@@ -24,7 +24,7 @@ public class Main {
     private static OBSRemoteController obsRemoteController;
 
     public static void main(String[] args) {
-        System.out.println("OBS Websocket Control");
+        System.out.println("OBS Websocket Control 2");
 
         ConsoleHandler ch = new ConsoleHandler();
         ch.setLevel(Level.FINE);

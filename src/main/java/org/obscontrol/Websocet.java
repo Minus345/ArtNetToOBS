@@ -2,6 +2,7 @@ package org.obscontrol;
 
 import io.obswebsocket.community.client.OBSRemoteController;
 import io.obswebsocket.community.client.model.Scene;
+
 import java.util.List;
 
 public class Websocet {
@@ -33,8 +34,8 @@ public class Websocet {
         boolean isReconnecting = false;
         if (!isReconnecting) {
             this.onFirstConnection();
-            Main.setObsRemoteController(this.obsRemoteController);
-        }else{
+
+        } else {
             System.out.println("Error connecting");
         }
     }
@@ -59,6 +60,13 @@ public class Websocet {
                 }
                 Main.setSceneList(list);
                 //getSceneListResponse.getScenes().forEach(scene -> log.info("Scene: {}", scene));
+            }
+        });
+        Main.setObsRemoteController(this.obsRemoteController);
+        Main.getObsRemoteController().getCurrentProgramScene(getCurrentProgramSceneResponse -> {
+            if (getCurrentProgramSceneResponse.isSuccessful()) {
+                //System.out.println("Current Scenen Name: " + getCurrentProgramSceneResponse.getCurrentProgramSceneName());
+                Main.getObsRemoteController().setCurrentProgramScene("0",1);
             }
         });
     }

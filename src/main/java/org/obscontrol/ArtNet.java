@@ -27,13 +27,15 @@ public class ArtNet {
                 if (Main.getSceneList().stream().map(Scene::getSceneName).anyMatch(String.valueOf(channel)::equals)) {
                     System.out.println("Send Scene Change to: " + channel);
                     for (int j = 0; j < Main.getSceneList().size(); j++) {
-                        if (Main.getSceneList().get(j).getSceneName().equals(String.valueOf(channel))) {
-                            if (Main.getObsRemoteController().getCurrentProgramScene(1).getCurrentProgramSceneName().equals(Main.getSceneList().get(j).getSceneName())) {
-                                System.out.println("Scene is active");
-                            } else {
-                                Main.getObsRemoteController().setCurrentProgramScene(String.valueOf(channel), 1);
+                        Main.setObsRemoteController(Main.getObsRemoteController());
+                        Main.getObsRemoteController().getCurrentProgramScene(getCurrentProgramSceneResponse -> {
+                            if (getCurrentProgramSceneResponse.isSuccessful()) {
+                                //System.out.println("Current Scene Name: " + getCurrentProgramSceneResponse.getCurrentProgramSceneName());
+                                Main.getObsRemoteController().setCurrentProgramScene(String.valueOf(channel),1);
+                            }else{
+                                System.out.println("Scene switch not successful");
                             }
-                        }
+                        });
                     }
                 }
             }
